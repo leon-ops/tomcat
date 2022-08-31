@@ -1,0 +1,15 @@
+---
+# tasks file for installTomcat
+- name: install packages
+  ansible.builtin.package:
+    name:
+      - net-tools
+      - vim
+      - zip
+- name: download and install apache tomcat 9
+  get_url:
+    url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.65/bin/apache-tomcat-9.0.65.zip 
+    dest: /tmp/
+- name: install 
+  shell : "cd /tmp/ ; unzip https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.65/bin/apache-tomcat-9.0.65.zip; mkdir -p /opt/ && mv apache-tomcat-9* /opt/ && ln -s /opt/apache-tomcat-9.0.65 /opt/tomcat && chmod +x /opt/tomcat/bin/*.sh && chown -R tomcat:tomcat /opt/tomcat"
+
